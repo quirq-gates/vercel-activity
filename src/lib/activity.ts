@@ -1,6 +1,5 @@
 import "server-only";
 import { cacheLife } from "next/cache";
-import workspace from "../../workspace.json";
 
 // Everything in this file runs on the server. The Vercel token is read here and
 // never leaves it: pages only receive the allowlisted shapes below.
@@ -56,8 +55,7 @@ export type Account =
       generatedAt: number;
       name: string;
       createdAt: number | null;
-      totalProjects: number;
-      workspaceProjects: string[];
+      projects: string[];
       domains: PublicDomain[];
     };
 
@@ -66,7 +64,6 @@ const DAY = 86_400_000;
 const WINDOW_DAYS = 30;
 const FEED_SIZE = 40;
 const MAX_PAGES = 20;
-const WORKSPACE_REPOS = new Set(workspace.repos.map((r) => r.toLowerCase()));
 
 type Params = Record<string, string | number | string[] | undefined>;
 
@@ -146,14 +143,6 @@ function repoOf(p: RawProject): { org: string; repo: string } | null {
     return { org: meta.githubCommitOrg, repo: meta.githubCommitRepo };
   }
   return null;
-}
-
-// PROJECTS=all shows every project in the team (when the whole team is the
-// workspace's); otherwise only projects whose repo is listed in workspace.json.
-function inWorkspace(p: RawProject): boolean {
-  if (process.env.PROJECTS === "all") return true;
-  const r = repoOf(p);
-  return r !== null && WORKSPACE_REPOS.has(`${r.org}/${r.repo}`.toLowerCase());
 }
 
 async function deploymentsSince(projectIds: string[], since: number): Promise<RawDeployment[]> {
@@ -269,7 +258,7 @@ export async function getActivity(): Promise<Activity> {
   let slug: string | null;
   try {
     [rawProjects, slug] = await Promise.all([
-      allProjects().then((ps) => ps.filter(inWorkspace)),
+      allProjects(),
       teamSlug(),
     ]);
     rawDeployments = rawProjects.length
@@ -377,14 +366,12 @@ export async function getAccount(): Promise<Account> {
       vercel<{ domains: RawDomain[] }>("/v5/domains", { limit: 100 }),
     ]);
 
-    // Only workspace project names are revealed next to a domain.
-    const ws = projects.filter(inWorkspace);
     const domains: PublicDomain[] = domainPage.domains.map((d) => ({
       name: d.name,
       active: Boolean(d.verified && (d.configVerifiedAt || d.nsVerifiedAt)),
       dns: d.nameservers?.some((n) => n.endsWith("vercel-dns.com")) ? "Vercel DNS" : "External DNS",
       addedAt: d.createdAt,
-      usedBy: ws
+      usedBy: projects
         .filter((p) => customDomains(p).some((h) => h === d.name || h.endsWith(`.${d.name}`)))
         .map((p) => p.name),
     }));
@@ -395,8 +382,7 @@ export async function getAccount(): Promise<Account> {
       generatedAt,
       name: info.name ?? "Vercel account",
       createdAt: info.createdAt ?? null,
-      totalProjects: projects.length,
-      workspaceProjects: ws.map((p) => p.name).sort(),
+      projects: projects.map((p) => p.name).sort(),
       domains,
     };
   } catch (err) {

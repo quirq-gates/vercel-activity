@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </header>
           {children}
           <footer className="mt-4 text-xs text-muted">
-            Only projects deployed from our workspace are listed. Preview URLs, private repos
+            Every project here is deployed from our workspace. Preview URLs, private repos
             and account details such as IDs and emails are never shown.
           </footer>
         </main>

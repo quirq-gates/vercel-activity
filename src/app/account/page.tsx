@@ -22,7 +22,7 @@ export default async function AccountPage() {
     <>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <p className="text-sm text-secondary">
-          The Vercel account these projects deploy to, and the domains on it.
+          The Vercel account our workspace deploys to, and the domains on it.
         </p>
         <p className="text-xs text-muted">
           Updated <TimeAgo ts={data.generatedAt} /> · refreshes every 15 min
@@ -46,13 +46,11 @@ export default async function AccountPage() {
               )}
             </div>
             <div className="rounded-lg border border-grid bg-card p-4">
-              <div className="text-xs text-muted">Projects from this workspace</div>
+              <div className="text-xs text-muted">Projects</div>
               <div className="mt-1 text-2xl font-semibold tabular-nums">
-                {data.workspaceProjects.length}
+                {data.projects.length}
               </div>
-              <div className="mt-0.5 text-xs text-secondary">
-                of {data.totalProjects} on the account
-              </div>
+              <div className="mt-0.5 text-xs text-secondary">deployed from our workspace</div>
             </div>
             <div className="rounded-lg border border-grid bg-card p-4">
               <div className="text-xs text-muted">Active domains</div>
@@ -123,9 +121,9 @@ export default async function AccountPage() {
           </section>
 
           <section className="flex flex-col gap-3">
-            <h2 className="text-sm font-medium text-secondary">Workspace projects on this account</h2>
+            <h2 className="text-sm font-medium text-secondary">Projects on this account</h2>
             <ul className="flex flex-wrap gap-2">
-              {data.workspaceProjects.map((name) => (
+              {data.projects.map((name) => (
                 <li
                   key={name}
                   className="rounded-md border border-grid bg-card px-2.5 py-1 text-sm text-secondary"
