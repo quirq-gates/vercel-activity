@@ -94,6 +94,9 @@ type RawProject = {
   link?: { type?: string; org?: string; repo?: string };
   targets?: { production?: { alias?: string[] } };
   alias?: { domain?: string }[];
+  ssoProtection?: { deploymentType?: string } | null;
+  passwordProtection?: unknown;
+  latestDeployments?: { meta?: Record<string, string | undefined> }[];
 };
 
 type RawDeployment = {
@@ -112,6 +115,7 @@ type RawDomain = {
   name: string;
   verified?: boolean;
   configVerifiedAt?: number | null;
+  nsVerifiedAt?: number | null;
   nameservers?: string[];
   createdAt: number;
 };
@@ -131,10 +135,25 @@ async function allProjects(): Promise<RawProject[]> {
   return out;
 }
 
-// Only projects linked to a repo listed in workspace.json are ever shown.
+// The GitHub repo behind a project: its Git link, or for CLI deploys the
+// repo recorded on its latest deployment.
+function repoOf(p: RawProject): { org: string; repo: string } | null {
+  if (p.link?.type === "github" && p.link.org && p.link.repo) {
+    return { org: p.link.org, repo: p.link.repo };
+  }
+  const meta = p.latestDeployments?.[0]?.meta;
+  if (meta?.githubCommitOrg && meta.githubCommitRepo) {
+    return { org: meta.githubCommitOrg, repo: meta.githubCommitRepo };
+  }
+  return null;
+}
+
+// PROJECTS=all shows every project in the team (when the whole team is the
+// workspace's); otherwise only projects whose repo is listed in workspace.json.
 function inWorkspace(p: RawProject): boolean {
-  if (p.link?.type !== "github" || !p.link.org || !p.link.repo) return false;
-  return WORKSPACE_REPOS.has(`${p.link.org}/${p.link.repo}`.toLowerCase());
+  if (process.env.PROJECTS === "all") return true;
+  const r = repoOf(p);
+  return r !== null && WORKSPACE_REPOS.has(`${r.org}/${r.repo}`.toLowerCase());
 }
 
 async function deploymentsSince(projectIds: string[], since: number): Promise<RawDeployment[]> {
@@ -189,15 +208,40 @@ function normalizeState(s: string | undefined): DeployState {
   }
 }
 
-// Only custom domains are shown: *.vercel.app aliases carry the team slug and
-// are often behind Vercel Authentication.
-function customDomains(p: RawProject): string[] {
+function productionAliases(p: RawProject): string[] {
   const all = [
     ...(p.targets?.production?.alias ?? []),
     ...(p.alias ?? []).map((a) => a.domain ?? ""),
   ];
-  const custom = [...new Set(all.filter((d) => d && !d.endsWith(".vercel.app")))];
-  return custom.sort((a, b) => a.length - b.length);
+  return [...new Set(all.filter(Boolean))].sort((a, b) => a.length - b.length);
+}
+
+function customDomains(p: RawProject): string[] {
+  return productionAliases(p).filter((d) => !d.endsWith(".vercel.app"));
+}
+
+// A custom domain if there is one. Otherwise the project's short *.vercel.app
+// production alias, which Standard Protection leaves public; aliases carrying
+// the team slug or a branch name stay behind Vercel Authentication.
+function publicDomain(p: RawProject, teamSlug: string | null): string | null {
+  const custom = customDomains(p)[0];
+  if (custom) return custom;
+  const sso = p.ssoProtection?.deploymentType;
+  if (p.passwordProtection || (sso && sso !== "all_except_custom_domains" && sso !== "preview")) {
+    return null;
+  }
+  return (
+    productionAliases(p).find(
+      (d) => d.endsWith(".vercel.app") && !d.includes("-git-") && !(teamSlug && d.includes(teamSlug)),
+    ) ?? null
+  );
+}
+
+async function teamSlug(): Promise<string | null> {
+  const team = process.env.VERCEL_TEAM_ID;
+  if (!team) return null;
+  const info = await vercel<{ slug?: string }>(`/v2/teams/${encodeURIComponent(team)}`);
+  return info.slug ?? null;
 }
 
 function firstLine(s: string | undefined): string | null {
@@ -222,8 +266,12 @@ export async function getActivity(): Promise<Activity> {
 
   let rawProjects: RawProject[];
   let rawDeployments: RawDeployment[];
+  let slug: string | null;
   try {
-    rawProjects = (await allProjects()).filter(inWorkspace);
+    [rawProjects, slug] = await Promise.all([
+      allProjects().then((ps) => ps.filter(inWorkspace)),
+      teamSlug(),
+    ]);
     rawDeployments = rawProjects.length
       ? await deploymentsSince(
           rawProjects.map((p) => p.id),
@@ -243,7 +291,8 @@ export async function getActivity(): Promise<Activity> {
   const repoPublic = new Map<string, boolean>();
   await Promise.all(
     rawProjects.map(async (p) => {
-      repoPublic.set(p.name, await isPublicRepo(p.link!.org!, p.link!.repo!));
+      const r = repoOf(p);
+      repoPublic.set(p.name, r ? await isPublicRepo(r.org, r.repo) : false);
     }),
   );
 
@@ -273,11 +322,12 @@ export async function getActivity(): Promise<Activity> {
 
   const projects: PublicProject[] = rawProjects.map((p) => {
     const own = deployments.filter((d) => d.project === p.name);
+    const r = repoOf(p);
     return {
       name: p.name,
       framework: p.framework ?? null,
-      domain: customDomains(p)[0] ?? null,
-      repoUrl: repoPublic.get(p.name) ? `https://github.com/${p.link!.org}/${p.link!.repo}` : null,
+      domain: publicDomain(p, slug),
+      repoUrl: r && repoPublic.get(p.name) ? `https://github.com/${r.org}/${r.repo}` : null,
       last: own[0] ?? null,
       deploys: own.length,
       errors: own.filter((d) => d.state === "ERROR").length,
@@ -331,7 +381,7 @@ export async function getAccount(): Promise<Account> {
     const ws = projects.filter(inWorkspace);
     const domains: PublicDomain[] = domainPage.domains.map((d) => ({
       name: d.name,
-      active: Boolean(d.verified && d.configVerifiedAt),
+      active: Boolean(d.verified && (d.configVerifiedAt || d.nsVerifiedAt)),
       dns: d.nameservers?.some((n) => n.endsWith("vercel-dns.com")) ? "Vercel DNS" : "External DNS",
       addedAt: d.createdAt,
       usedBy: ws
