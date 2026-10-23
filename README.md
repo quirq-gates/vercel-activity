@@ -19,6 +19,7 @@ The token never reaches the browser.
 |---|---|---|
 | `VERCEL_TOKEN` | yes | Read token for the team (mark it Sensitive) |
 | `VERCEL_TEAM_ID` | yes | Team whose projects are shown |
+| `PROJECTS` | no | `all` to show every project in the team instead of only the repos in `workspace.json` |
 | `SHOW_PRIVATE_COMMIT_MESSAGES` | no | `true` to show commit titles for private repos (default: only public repos) |
 
 ## What is public
