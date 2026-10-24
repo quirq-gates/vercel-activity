@@ -1,28 +1,72 @@
 @import "tailwindcss";
 
-/* Light theme, shared with the GitHub portfolio (Space portfolio). */
+/* Light by default, dark when the OS asks for it, and an explicit choice from
+   the header switch (stored as data-theme on <html>) wins over both. Shared
+   with the GitHub portfolio. */
+:root {
+  color-scheme: light;
+  --surface: #f6f6f4;
+  --card: #fcfcfb;
+  --raised: #f0efec;
+  --grid: #e3e2de;
+  --axis: #d4d3ce;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --ink-3: #77766f;
+  --good: #0ca30c;
+  --critical: #d03b3b;
+  --warning: #b98200;
+  --neutral: #a3a29c;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --surface: #0b0b0b;
+    --card: #121211;
+    --raised: #1a1a19;
+    --grid: #2a2a28;
+    --axis: #3a3a37;
+    --ink: #f0efec;
+    --ink-2: #c3c2b7;
+    --ink-3: #8a8980;
+    --warning: #fab219;
+    --neutral: #5c5b56;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #0b0b0b;
+  --card: #121211;
+  --raised: #1a1a19;
+  --grid: #2a2a28;
+  --axis: #3a3a37;
+  --ink: #f0efec;
+  --ink-2: #c3c2b7;
+  --ink-3: #8a8980;
+  --warning: #fab219;
+  --neutral: #5c5b56;
+}
+
 @theme inline {
-  --color-surface: #f6f6f4;
-  --color-card: #fcfcfb;
-  --color-raised: #f0efec;
-  --color-grid: #e3e2de;
-  --color-axis: #d4d3ce;
-  --color-primary: #0b0b0b;
-  --color-secondary: #52514e;
-  --color-muted: #77766f;
-  --color-good: #0ca30c;
-  --color-critical: #d03b3b;
-  --color-warning: #b98200;
-  --color-neutral: #a3a29c;
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-raised: var(--raised);
+  --color-grid: var(--grid);
+  --color-axis: var(--axis);
+  --color-primary: var(--ink);
+  --color-secondary: var(--ink-2);
+  --color-muted: var(--ink-3);
+  --color-good: var(--good);
+  --color-critical: var(--critical);
+  --color-warning: var(--warning);
+  --color-neutral: var(--neutral);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-:root {
-  color-scheme: light;
-}
-
 body {
-  background: var(--color-surface);
-  color: var(--color-primary);
+  background: var(--surface);
+  color: var(--ink);
 }

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import { GITHUB_PORTFOLIO, data, fmtDate } from "@/lib/data";
+import { ThemeSwitch, themeScript } from "@/components/ThemeSwitch";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -24,7 +25,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col font-sans">
         <header className="border-b border-grid bg-card">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-5 px-4 py-4 sm:px-6">
@@ -45,6 +50,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 Vercel
               </Link>
             </nav>
+            <div className="ml-auto">
+              <ThemeSwitch />
+            </div>
           </div>
         </header>
         <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-10 px-4 py-8 sm:px-6">
