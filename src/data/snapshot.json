@@ -1,5 +1,5 @@
 {
-  "takenAt": 1792822381493,
+  "takenAt": 1792822523099,
   "account": {
     "name": "quirq-research",
     "createdAt": 1791137325966
@@ -14,6 +14,16 @@
       "createdAt": 1792789052928,
       "shot": "/shots/vercel-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792822421393,
+          "durationMs": 14265,
+          "branch": "main",
+          "sha": "473e823",
+          "message": "Turn the dashboard into a static portfolio",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/473e823f3384f27d77eeda700b176fd9a5cd48dd"
+        },
         {
           "state": "READY",
           "production": true,
@@ -35,6 +45,26 @@
       "createdAt": 1792789042438,
       "shot": "/shots/github-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792822437064,
+          "durationMs": 17967,
+          "branch": "main",
+          "sha": "30e050d",
+          "message": "Turn github-activity into a static space portfolio",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/30e050d570e1d6c2e3c5647d4f118fd79c5621ea"
+        },
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792822411937,
+          "durationMs": 18920,
+          "branch": "main",
+          "sha": "30e050d",
+          "message": "Turn github-activity into a static space portfolio",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/30e050d570e1d6c2e3c5647d4f118fd79c5621ea"
+        },
         {
           "state": "READY",
           "production": true,
