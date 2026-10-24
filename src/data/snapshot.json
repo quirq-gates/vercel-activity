@@ -1,5 +1,5 @@
 {
-  "takenAt": 1792828673843,
+  "takenAt": 1792842862421,
   "account": {
     "name": "quirq-research",
     "createdAt": 1791137325966
@@ -14,6 +14,36 @@
       "createdAt": 1792789052928,
       "shot": "/shots/vercel-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792842805136,
+          "durationMs": 15002,
+          "branch": "main",
+          "sha": "90e6e5e",
+          "message": "Match github-activity's navbar exactly",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/90e6e5ea50f874098d510277a0efc4fc2be3d52d"
+        },
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792842689308,
+          "durationMs": 15406,
+          "branch": "main",
+          "sha": "2aff6ec",
+          "message": "Bring back the subtle full-width top bar",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/2aff6ec13626a226680fb967191d73047214325d"
+        },
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792828678910,
+          "durationMs": 11391,
+          "branch": "main",
+          "sha": "c5ca6f1",
+          "message": "Refresh snapshot",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/c5ca6f16e23172b1e1df889f7644971cd8c59979"
+        },
         {
           "state": "READY",
           "production": true,
@@ -95,6 +125,26 @@
       "createdAt": 1792789042438,
       "shot": "/shots/github-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792842668057,
+          "durationMs": 13278,
+          "branch": "main",
+          "sha": "4394716",
+          "message": "Bring back the subtle full-width navbar, with the theme switch",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/4394716d76d3e7a3963f2c1adbe18e64f437b479"
+        },
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792828762122,
+          "durationMs": 19089,
+          "branch": "main",
+          "sha": "5e9c087",
+          "message": "Rename to Space portfolio, matching vercel-activity",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/5e9c08723e9a679e537a54e68a7cdaef01ae55c4"
+        },
         {
           "state": "READY",
           "production": true,
