@@ -41,7 +41,7 @@ export function ThemeSwitch() {
       }}
       aria-label={`Switch to ${next} mode`}
       title={`Switch to ${next} mode`}
-      className="flex size-8 items-center justify-center rounded-md text-secondary hover:bg-raised hover:text-primary"
+      className="grid size-8 place-items-center rounded-md text-secondary hover:bg-raised hover:text-primary"
     >
       {theme === "dark" ? (
         <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden>
