@@ -1,5 +1,5 @@
 {
-  "takenAt": 1792822523099,
+  "takenAt": 1792828311956,
   "account": {
     "name": "quirq-research",
     "createdAt": 1791137325966
@@ -14,6 +14,26 @@
       "createdAt": 1792789052928,
       "shot": "/shots/vercel-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792828243446,
+          "durationMs": 11898,
+          "branch": "main",
+          "sha": "2a7e8e8",
+          "message": "Match the GitHub portfolio: light theme, Space portfolio header",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/2a7e8e8c4c2eeb68f6fe237eeb37766f94611afd"
+        },
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792822528719,
+          "durationMs": 18655,
+          "branch": "main",
+          "sha": "bc9fc30",
+          "message": "Refresh snapshot",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/bc9fc30f68757e2aeca2b00862c5e5be89cb9340"
+        },
         {
           "state": "READY",
           "production": true,
@@ -45,6 +65,16 @@
       "createdAt": 1792789042438,
       "shot": "/shots/github-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792822558680,
+          "durationMs": 16508,
+          "branch": "main",
+          "sha": "689f0ce",
+          "message": "Match the Vercel portfolio: dark theme, quirq space header, Vercel/GitHub switch",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/689f0cede69d71213058fcbd6100f686737f6dac"
+        },
         {
           "state": "READY",
           "production": true,
