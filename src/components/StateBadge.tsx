@@ -1,4 +1,4 @@
-import type { DeployState } from "@/lib/activity";
+import type { DeployState } from "@/lib/data";
 
 const STYLE: Record<DeployState, { label: string; icon: string; cls: string }> = {
   READY: { label: "Ready", icon: "●", cls: "text-good" },

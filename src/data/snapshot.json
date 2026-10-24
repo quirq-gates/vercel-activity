@@ -1,0 +1,128 @@
+{
+  "takenAt": 1792822381493,
+  "account": {
+    "name": "quirq-research",
+    "createdAt": 1791137325966
+  },
+  "projects": [
+    {
+      "name": "vercel-activity",
+      "blurb": "This site: a portfolio of what our space ships on Vercel.",
+      "framework": "nextjs",
+      "url": "https://vercel-activity-delta.vercel.app",
+      "repoUrl": "https://github.com/quirq-gates/vercel-activity",
+      "createdAt": 1792789052928,
+      "shot": "/shots/vercel-activity.jpg",
+      "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792789056958,
+          "durationMs": 34551,
+          "branch": "main",
+          "sha": "98f7755",
+          "message": "Point workspace.json at quirq-gates/vercel-activity",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/98f7755ff76f7981b09b5c2f3223b828181d277d"
+        }
+      ]
+    },
+    {
+      "name": "github-activity",
+      "blurb": "The GitHub side of the portfolio: public repos and recent work.",
+      "framework": "nextjs",
+      "url": "https://github-activity-bay.vercel.app",
+      "repoUrl": "https://github.com/quirq-gates/github-activity",
+      "createdAt": 1792789042438,
+      "shot": "/shots/github-activity.jpg",
+      "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1792789046260,
+          "durationMs": 38264,
+          "branch": "main",
+          "sha": "d4a8271",
+          "message": "GitHub activity dashboard: public repos, server-side token, 5-min cache",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/d4a8271f3ab2f4c703daf4379abf8087a52dc63b"
+        }
+      ]
+    },
+    {
+      "name": "monitor-stream",
+      "blurb": null,
+      "framework": "nextjs",
+      "url": "https://monitor-stream.vercel.app",
+      "repoUrl": null,
+      "createdAt": 1791159061762,
+      "shot": "/shots/monitor-stream.jpg",
+      "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1791159064573,
+          "durationMs": 19468,
+          "branch": "main",
+          "sha": "0eb1685",
+          "message": null,
+          "commitUrl": null
+        }
+      ]
+    },
+    {
+      "name": "posthog-preview",
+      "blurb": null,
+      "framework": "gatsby",
+      "url": "https://posthog-preview.vercel.app",
+      "repoUrl": null,
+      "createdAt": 1791161664830,
+      "shot": "/shots/posthog-preview.jpg",
+      "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1791164949300,
+          "durationMs": 252263,
+          "branch": null,
+          "sha": null,
+          "message": null,
+          "commitUrl": null
+        }
+      ]
+    },
+    {
+      "name": "writings",
+      "blurb": null,
+      "framework": null,
+      "url": "https://writings-silk.vercel.app",
+      "repoUrl": "https://github.com/quirq-jobs/writings",
+      "createdAt": 1791838731803,
+      "shot": null,
+      "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1791838734750,
+          "durationMs": 4271,
+          "branch": "main",
+          "sha": "594dcdf",
+          "message": "Merge pull request #3 from sharmasuraj0123/posts/2026-10-config-and-compression",
+          "commitUrl": "https://github.com/quirq-jobs/writings/commit/594dcdf44504fdaf9720af6bfc6eb2a92ba0a4c5"
+        }
+      ]
+    }
+  ],
+  "domains": [
+    {
+      "name": "quirq.online",
+      "active": true,
+      "dns": "Vercel DNS",
+      "addedAt": 1792749338471
+    },
+    {
+      "name": "quirq.xyz",
+      "active": true,
+      "dns": "Vercel DNS",
+      "addedAt": 1791839733942
+    }
+  ]
+}

@@ -1,37 +1,28 @@
 # vercel-activity
 
-A small public site showing deployment activity for every project in our
-workspace's Vercel team (quirq-research), plus an `/account` page with the
-account and its domains. Deploys go through the Vercel CLI.
+A portfolio of everything our space ships on Vercel (team `quirq-research`):
+live projects with screenshots and a "Try it here" embed, what changed in each
+deploy, and the team's domains. Its GitHub twin is
+[github-activity](https://github.com/quirq-gates/github-activity).
 
-The page is a Next.js server component. `src/lib/activity.ts` calls the Vercel
-REST API with a server-only token, keeps only an allowlist of public-safe
-fields, and caches the result for 5 minutes (`"use cache"` + `cacheLife`).
-The token never reaches the browser.
+The site is fully static. It holds no tokens and calls no API at runtime: it
+renders `src/data/snapshot.json`, which `npm run snapshot` builds on a machine
+where the Vercel CLI is logged in.
 
-## Environment
+## Update the portfolio
 
-| Variable | Required | Meaning |
-|---|---|---|
-| `VERCEL_TOKEN` | yes | Read token for the team (mark it Sensitive) |
-| `VERCEL_TEAM_ID` | yes | Team whose projects are shown |
-| `SHOW_PRIVATE_COMMIT_MESSAGES` | no | `true` to show commit titles for private repos (default: only public repos) |
+1. Edit `src/data/showcase.json` to choose which projects appear, in what order,
+   with optional one-line blurbs.
+2. `npm run snapshot` refreshes the data and the screenshots in `public/shots/`.
+   Pass `-- --no-shots` to keep the old screenshots.
+3. Commit, then deploy: `vercel deploy --prod --scope quirq-research`.
 
-## What is public
+## What the snapshot keeps
 
-Project name, framework, custom production domain, GitHub link (public repos
-only), deploy state, prod/preview, time, build duration, branch, short SHA, and
-the first line of the commit message (public repos only unless enabled above).
+Project name, blurb, framework, public URL, GitHub link (public repos only),
+screenshot, and for each deploy: state, production or preview, time, build
+duration, branch, short SHA, and the commit title (public repos only). Domains:
+name, status, DNS provider.
 
-The account page shows the account (team) name, when it was created, project
-counts, and each domain's name, status, DNS provider and which projects use it.
-
-Never shown: env vars, preview/`*.vercel.app` URLs, inspector links, team or
-user IDs, creator usernames, commit authors/emails, private repo names, logs.
-
-## Develop
-
-```bash
-npm install
-VERCEL_TOKEN=... VERCEL_TEAM_ID=... npm run dev
-```
+It never keeps env vars, preview or team-slug URLs, IDs, usernames, emails or
+commit bodies.

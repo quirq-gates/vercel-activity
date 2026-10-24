@@ -1,0 +1,11 @@
+{
+  "$comment": "Projects featured on the portfolio, in display order. A project not listed here is skipped. Blurbs are optional; without one, the GitHub repo description is used. Run `npm run snapshot` after editing.",
+  "team": "quirq-research",
+  "projects": [
+    { "name": "vercel-activity", "blurb": "This site: a portfolio of what our space ships on Vercel." },
+    { "name": "github-activity", "blurb": "The GitHub side of the portfolio: public repos and recent work." },
+    { "name": "monitor-stream" },
+    { "name": "posthog-preview" },
+    { "name": "writings" }
+  ]
+}

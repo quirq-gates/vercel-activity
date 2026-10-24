@@ -1,195 +1,126 @@
-import { getActivity, type PublicDeployment, type PublicProject } from "@/lib/activity";
-import { DeployChart } from "@/components/DeployChart";
-import { StateBadge } from "@/components/StateBadge";
+import Link from "next/link";
+import { data, hostOf, recentShips, type Project } from "@/lib/data";
+import { ShipRow } from "@/components/ShipRow";
 import { TimeAgo } from "@/components/TimeAgo";
 
-function duration(ms: number | null) {
-  if (ms === null) return "—";
-  const s = Math.round(ms / 1000);
-  return s < 60 ? `${s}s` : `${Math.floor(s / 60)}m ${s % 60}s`;
-}
-
-function Stat({ label, value, hint }: { label: string; value: string; hint?: string }) {
+function Stat({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div className="rounded-lg border border-grid bg-card p-4">
+    <div className="flex flex-col gap-1">
+      <div className="text-2xl font-semibold tabular-nums">{value}</div>
       <div className="text-xs text-muted">{label}</div>
-      <div className="mt-1 text-2xl font-semibold tabular-nums">{value}</div>
-      {hint && <div className="mt-0.5 text-xs text-secondary">{hint}</div>}
     </div>
   );
 }
 
-function ProjectCard({ p }: { p: PublicProject }) {
+function ProjectCard({ p }: { p: Project }) {
+  const last = p.deployments[0];
   return (
-    <li className="flex flex-col gap-3 rounded-lg border border-grid bg-card p-4">
-      <div className="flex items-start justify-between gap-2">
-        <div className="min-w-0">
-          <div className="truncate font-medium">{p.name}</div>
-          <div className="text-xs text-muted">{p.framework ?? "static"}</div>
+    <li className="group relative flex flex-col overflow-hidden rounded-xl border border-grid bg-card transition-colors hover:border-axis">
+      <div className="relative aspect-[16/10] overflow-hidden border-b border-grid bg-surface">
+        {p.shot ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={p.shot}
+            alt=""
+            className="size-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+          />
+        ) : (
+          <div className="grid size-full place-items-center font-mono text-sm text-muted">{p.name}</div>
+        )}
+      </div>
+      <div className="flex flex-1 flex-col gap-2 p-4">
+        <div className="flex items-baseline justify-between gap-2">
+          <Link href={`/p/${p.name}`} className="font-medium after:absolute after:inset-0">
+            {p.name}
+          </Link>
+          {p.framework && <span className="text-xs text-muted">{p.framework}</span>}
         </div>
-        {p.last && <StateBadge state={p.last.state} />}
-      </div>
-      <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs">
-        {p.domain && (
-          <a
-            href={`https://${p.domain}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="truncate text-secondary hover:text-primary"
-          >
-            {p.domain} ↗
-          </a>
-        )}
-        {p.repoUrl && (
-          <a
-            href={p.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-secondary hover:text-primary"
-          >
-            GitHub ↗
-          </a>
-        )}
-      </div>
-      <div className="mt-auto flex items-center justify-between text-xs text-muted">
-        <span>
-          <span className="tabular-nums text-secondary">{p.deploys}</span> deploys
-          {p.errors > 0 && (
-            <>
-              {" · "}
-              <span className="tabular-nums text-critical">{p.errors}</span> failed
-            </>
+        {p.blurb && <p className="text-sm text-secondary">{p.blurb}</p>}
+        <div className="relative z-10 mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 pt-2 text-xs">
+          {p.url && (
+            <a href={p.url} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary">
+              {hostOf(p.url)} ↗
+            </a>
           )}
-        </span>
-        {p.last && <TimeAgo ts={p.last.createdAt} />}
+          {p.repoUrl && (
+            <a href={p.repoUrl} target="_blank" rel="noopener noreferrer" className="text-secondary hover:text-primary">
+              Source ↗
+            </a>
+          )}
+          {last && (
+            <span className="ml-auto text-muted">
+              shipped <TimeAgo ts={last.createdAt} />
+            </span>
+          )}
+        </div>
       </div>
     </li>
   );
 }
 
-function FeedRow({ d }: { d: PublicDeployment }) {
-  return (
-    <tr className="border-t border-grid align-top">
-      <td className="py-2 pr-3 whitespace-nowrap">
-        <StateBadge state={d.state} />
-      </td>
-      <td className="py-2 pr-3 font-medium whitespace-nowrap">{d.project}</td>
-      <td className="py-2 pr-3 whitespace-nowrap">
-        <span
-          className={`rounded px-1.5 py-0.5 text-[10px] uppercase tracking-wide ${
-            d.production ? "bg-primary text-surface" : "border border-grid text-muted"
-          }`}
-        >
-          {d.production ? "prod" : "preview"}
-        </span>
-      </td>
-      <td className="py-2 pr-3 text-secondary">
-        <div className="max-w-md truncate">
-          {d.message ?? (d.sha ? `commit ${d.sha}` : "manual deploy")}
-        </div>
-        {(d.branch || d.sha) && (
-          <div className="font-mono text-[11px] text-muted">
-            {d.branch}
-            {d.branch && d.sha && " · "}
-            {d.sha}
-          </div>
-        )}
-      </td>
-      <td className="py-2 pr-3 text-right tabular-nums text-muted whitespace-nowrap">
-        {duration(d.durationMs)}
-      </td>
-      <td className="py-2 text-right text-muted whitespace-nowrap">
-        <TimeAgo ts={d.createdAt} />
-      </td>
-    </tr>
-  );
-}
-
-export default async function Home() {
-  const data = await getActivity();
+export default function Home() {
+  const ships = recentShips(12);
+  const live = data.projects.filter((p) => p.url).length;
+  const activeDomains = data.domains.filter((d) => d.active);
 
   return (
     <>
-      <div className="flex flex-wrap items-end justify-between gap-4">
-        <p className="text-sm text-secondary">
-          What&apos;s shipping across the Vercel projects deployed from our workspace.
+      <section className="flex flex-col gap-6 pt-6">
+        <h1 className="max-w-3xl text-4xl font-semibold tracking-tight sm:text-5xl">
+          Everything our space has shipped on Vercel.
+        </h1>
+        <p className="max-w-2xl text-secondary">
+          Live projects, what changed in each deploy, and where they live. Open any of them, or try
+          it right here.
         </p>
-        <p className="text-xs text-muted">
-          Updated <TimeAgo ts={data.generatedAt} /> · refreshes every 5 min
-        </p>
-      </div>
-
-      {!data.ok ? (
-        <div className="rounded-lg border border-grid bg-card p-6 text-sm text-secondary">
-          Activity is unavailable right now. {data.reason}
+        <div className="flex flex-wrap gap-10 pt-2">
+          <Stat label="live projects" value={live} />
+          <Stat label="deploys" value={data.projects.reduce((n, p) => n + p.deployments.length, 0)} />
+          <Stat label="domains" value={data.domains.length} />
+          {ships[0] && <Stat label="last shipped" value={<TimeAgo ts={ships[0].createdAt} />} />}
         </div>
-      ) : (
-        <Dashboard data={data} />
-      )}
-    </>
-  );
-}
-
-function Dashboard({ data }: { data: Extract<Awaited<ReturnType<typeof getActivity>>, { ok: true }> }) {
-  const all = data.days.reduce(
-    (acc, d) => ({ ready: acc.ready + d.ready, error: acc.error + d.error, other: acc.other + d.other }),
-    { ready: 0, error: 0, other: 0 },
-  );
-  const total = all.ready + all.error + all.other;
-  const finished = all.ready + all.error;
-  const week = data.days.slice(-7).reduce((n, d) => n + d.ready + d.error + d.other, 0);
-  const failing = data.projects.filter((p) => p.last?.state === "ERROR").length;
-
-  return (
-    <>
-      <section className="grid grid-cols-2 gap-3 md:grid-cols-4">
-        <Stat label="Projects" value={String(data.projects.length)} />
-        <Stat label="Deploys, last 7 days" value={String(week)} hint={`${total} in ${data.windowDays} days`} />
-        <Stat
-          label="Success rate"
-          value={finished ? `${Math.round((all.ready / finished) * 100)}%` : "—"}
-          hint={`${all.error} failed`}
-        />
-        <Stat
-          label="Currently failing"
-          value={String(failing)}
-          hint={failing ? "latest deploy errored" : "all green"}
-        />
       </section>
 
-      <section className="rounded-lg border border-grid bg-card p-5">
-        <DeployChart days={data.days} />
-      </section>
-
-      <section className="flex flex-col gap-3">
+      <section className="flex flex-col gap-4">
         <h2 className="text-sm font-medium text-secondary">Projects</h2>
-        <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {data.projects.map((p) => (
             <ProjectCard key={p.name} p={p} />
           ))}
         </ul>
       </section>
 
-      <section className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-secondary">Latest deployments</h2>
-        <div className="overflow-x-auto rounded-lg border border-grid bg-card px-4">
-          <table className="w-full text-sm">
-            <thead className="sr-only">
-              <tr>
-                <th>State</th>
-                <th>Project</th>
-                <th>Environment</th>
-                <th>Commit</th>
-                <th>Build time</th>
-                <th>When</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.feed.map((d, i) => (
-                <FeedRow key={`${d.project}-${d.createdAt}-${i}`} d={d} />
-              ))}
-            </tbody>
-          </table>
+      <section className="grid grid-cols-1 gap-10 lg:grid-cols-[2fr_1fr]">
+        <div className="flex flex-col gap-4">
+          <h2 className="text-sm font-medium text-secondary">Recently shipped</h2>
+          <ul className="rounded-xl border border-grid bg-card px-4">
+            {ships.map((s, i) => (
+              <ShipRow key={`${s.project}-${s.createdAt}-${i}`} ship={s} project={s.project} />
+            ))}
+          </ul>
+        </div>
+        <div className="flex flex-col gap-4">
+          <h2 className="text-sm font-medium text-secondary">Domains</h2>
+          <ul className="flex flex-col gap-2">
+            {data.domains.map((d) => (
+              <li key={d.name} className="flex items-center justify-between rounded-xl border border-grid bg-card px-4 py-3">
+                <a
+                  href={`https://${d.name}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium hover:underline"
+                >
+                  {d.name}
+                </a>
+                <span className={`text-xs ${d.active ? "text-good" : "text-muted"}`}>
+                  {d.active ? "● Active" : "○ Not configured"}
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="text-xs text-muted">
+            {activeDomains.length} of {data.domains.length} active on {data.account.name}.
+          </p>
         </div>
       </section>
     </>
