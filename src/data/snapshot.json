@@ -1,5 +1,5 @@
 {
-  "takenAt": 1793188888986,
+  "takenAt": 1793210500840,
   "account": {
     "name": "quirq-research",
     "createdAt": 1791137325966
@@ -14,6 +14,16 @@
       "createdAt": 1792789052928,
       "shot": "/shots/vercel-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793188908658,
+          "durationMs": 13981,
+          "branch": "main",
+          "sha": "69ef650",
+          "message": "Hourly snapshot 2026-10-28 12:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/69ef6503eb7502bae3bba8572df43f0fbbb9ee91"
+        },
         {
           "state": "READY",
           "production": true,
@@ -253,16 +263,6 @@
           "sha": "2a7e8e8",
           "message": "Match the GitHub portfolio: light theme, Space portfolio header",
           "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/2a7e8e8c4c2eeb68f6fe237eeb37766f94611afd"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1792822528719,
-          "durationMs": 18655,
-          "branch": "main",
-          "sha": "bc9fc30",
-          "message": "Refresh snapshot",
-          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/bc9fc30f68757e2aeca2b00862c5e5be89cb9340"
         }
       ]
     },
@@ -275,6 +275,16 @@
       "createdAt": 1792789042438,
       "shot": "/shots/github-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793210441279,
+          "durationMs": 14082,
+          "branch": "main",
+          "sha": "0db3aba",
+          "message": "Hourly snapshot 2026-10-28 18:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/0db3aba5e35f7b8f3f6d3a259f354b54639a4303"
+        },
         {
           "state": "READY",
           "production": true,
@@ -514,16 +524,6 @@
           "sha": "2217e26",
           "message": "Follow the OS theme until the visitor picks one, like the Vercel portfolio",
           "commitUrl": "https://github.com/quirq-gates/github-activity/commit/2217e26a17d472338de8ec9d628ee597d309ffd2"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1792828454858,
-          "durationMs": 13608,
-          "branch": "main",
-          "sha": "beb574b",
-          "message": "Light by default, with a light/dark switch in the header",
-          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/beb574b833cb7bdd5c5d0ac9783a9b6d87f2d786"
         }
       ]
     },
