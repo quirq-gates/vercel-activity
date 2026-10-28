@@ -1,5 +1,5 @@
 {
-  "takenAt": 1793124098958,
+  "takenAt": 1793145681720,
   "account": {
     "name": "quirq-research",
     "createdAt": 1791137325966
@@ -14,6 +14,16 @@
       "createdAt": 1792789052928,
       "shot": "/shots/vercel-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793124119413,
+          "durationMs": 17579,
+          "branch": "main",
+          "sha": "bc41946",
+          "message": "Hourly snapshot 2026-10-27 18:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/bc4194639dab38f859442583c78eccd7285073dc"
+        },
         {
           "state": "READY",
           "production": true,
@@ -265,6 +275,16 @@
       "createdAt": 1792789042438,
       "shot": "/shots/github-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793145632184,
+          "durationMs": 11994,
+          "branch": "main",
+          "sha": "1c8b7ab",
+          "message": "Hourly snapshot 2026-10-28 00:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/1c8b7abc5a95235f1df4cf9612d4fd102a6be3ad"
+        },
         {
           "state": "READY",
           "production": true,
