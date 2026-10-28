@@ -1,5 +1,5 @@
 {
-  "takenAt": 1793167334212,
+  "takenAt": 1793188888986,
   "account": {
     "name": "quirq-research",
     "createdAt": 1791137325966
@@ -14,6 +14,16 @@
       "createdAt": 1792789052928,
       "shot": "/shots/vercel-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793167356552,
+          "durationMs": 15268,
+          "branch": "main",
+          "sha": "34a3a22",
+          "message": "Hourly snapshot 2026-10-28 06:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/34a3a22859dcc2816fc792756056cea3e765435b"
+        },
         {
           "state": "READY",
           "production": true,
@@ -253,16 +263,6 @@
           "sha": "bc9fc30",
           "message": "Refresh snapshot",
           "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/bc9fc30f68757e2aeca2b00862c5e5be89cb9340"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1792822421393,
-          "durationMs": 14265,
-          "branch": "main",
-          "sha": "473e823",
-          "message": "Turn the dashboard into a static portfolio",
-          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/473e823f3384f27d77eeda700b176fd9a5cd48dd"
         }
       ]
     },
@@ -275,6 +275,16 @@
       "createdAt": 1792789042438,
       "shot": "/shots/github-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793188831299,
+          "durationMs": 13289,
+          "branch": "main",
+          "sha": "45820fa",
+          "message": "Hourly snapshot 2026-10-28 12:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/45820fa997981469e3f072a7c3e576b67299a4f2"
+        },
         {
           "state": "READY",
           "production": true,
@@ -514,16 +524,6 @@
           "sha": "beb574b",
           "message": "Light by default, with a light/dark switch in the header",
           "commitUrl": "https://github.com/quirq-gates/github-activity/commit/beb574b833cb7bdd5c5d0ac9783a9b6d87f2d786"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1792822558680,
-          "durationMs": 16508,
-          "branch": "main",
-          "sha": "689f0ce",
-          "message": "Match the Vercel portfolio: dark theme, quirq space header, Vercel/GitHub switch",
-          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/689f0cede69d71213058fcbd6100f686737f6dac"
         }
       ]
     },
