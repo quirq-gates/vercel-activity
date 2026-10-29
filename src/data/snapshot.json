@@ -1,5 +1,5 @@
 {
-  "takenAt": 1793232094784,
+  "takenAt": 1793253693503,
   "account": {
     "name": "quirq-research",
     "createdAt": 1791137325966
@@ -14,6 +14,16 @@
       "createdAt": 1792789052928,
       "shot": "/shots/vercel-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793232112215,
+          "durationMs": 13812,
+          "branch": "main",
+          "sha": "e87d410",
+          "message": "Hourly snapshot 2026-10-29 00:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/e87d41093f48bae96394594a6fbfbcbdc353f2fd"
+        },
         {
           "state": "READY",
           "production": true,
@@ -253,16 +263,6 @@
           "sha": "381b8e4",
           "message": "Add dark mode and a light/dark switch",
           "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/381b8e46afb6f5dd2c1b224e9209ec1c508aa4f4"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1792828317039,
-          "durationMs": 11996,
-          "branch": "main",
-          "sha": "d43a169",
-          "message": "Refresh snapshot",
-          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/d43a16930ae2303b47a817fbafb511e58a73735a"
         }
       ]
     },
@@ -275,6 +275,16 @@
       "createdAt": 1792789042438,
       "shot": "/shots/github-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793253634745,
+          "durationMs": 15269,
+          "branch": "main",
+          "sha": "51b4b6c",
+          "message": "Hourly snapshot 2026-10-29 06:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/51b4b6ca92e42ee7791d2f4ffedcc77de506e8fa"
+        },
         {
           "state": "READY",
           "production": true,
@@ -514,16 +524,6 @@
           "sha": "4394716",
           "message": "Bring back the subtle full-width navbar, with the theme switch",
           "commitUrl": "https://github.com/quirq-gates/github-activity/commit/4394716d76d3e7a3963f2c1adbe18e64f437b479"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1792828762122,
-          "durationMs": 19089,
-          "branch": "main",
-          "sha": "5e9c087",
-          "message": "Rename to Space portfolio, matching vercel-activity",
-          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/5e9c08723e9a679e537a54e68a7cdaef01ae55c4"
         }
       ]
     },
