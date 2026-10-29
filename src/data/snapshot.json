@@ -1,5 +1,5 @@
 {
-  "takenAt": 1793275296768,
+  "takenAt": 1793296907149,
   "account": {
     "name": "quirq-research",
     "createdAt": 1791137325966
@@ -14,6 +14,16 @@
       "createdAt": 1792789052928,
       "shot": "/shots/vercel-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793275309537,
+          "durationMs": 22516,
+          "branch": "main",
+          "sha": "7e4d945",
+          "message": "Hourly snapshot 2026-10-29 12:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/7e4d94575d40b97e955924ad7c6d67a262dcb25c"
+        },
         {
           "state": "READY",
           "production": true,
@@ -253,16 +263,6 @@
           "sha": "c5ca6f1",
           "message": "Refresh snapshot",
           "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/c5ca6f16e23172b1e1df889f7644971cd8c59979"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1792828613495,
-          "durationMs": 12637,
-          "branch": "main",
-          "sha": "6b383b3",
-          "message": "Match the GitHub portfolio's header and theme switch",
-          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/6b383b313df0789dd5bf252b8eb4fd349c7f23ee"
         }
       ]
     },
@@ -275,6 +275,16 @@
       "createdAt": 1792789042438,
       "shot": "/shots/github-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793296840141,
+          "durationMs": 14564,
+          "branch": "main",
+          "sha": "fe7a457",
+          "message": "Hourly snapshot 2026-10-29 18:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/fe7a457bd872f0dfa8dc81a49984174361215d99"
+        },
         {
           "state": "READY",
           "production": true,
@@ -510,16 +520,6 @@
           "production": true,
           "createdAt": 1792843277458,
           "durationMs": 12757,
-          "branch": "main",
-          "sha": "c8f5d46",
-          "message": "Hourly snapshot 2026-10-24 12:00 UTC; refresh vercel-activity description",
-          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/c8f5d4658a24283a63ec7c013062e509168e6cc7"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1792843256072,
-          "durationMs": 14489,
           "branch": "main",
           "sha": "c8f5d46",
           "message": "Hourly snapshot 2026-10-24 12:00 UTC; refresh vercel-activity description",
