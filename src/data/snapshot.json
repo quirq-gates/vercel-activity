@@ -1,5 +1,5 @@
 {
-  "takenAt": 1793534510516,
+  "takenAt": 1793556105642,
   "account": {
     "name": "quirq-research",
     "createdAt": 1791137325966
@@ -14,6 +14,16 @@
       "createdAt": 1792789052928,
       "shot": "/shots/vercel-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793534524578,
+          "durationMs": 8206,
+          "branch": "main",
+          "sha": "ba92b67",
+          "message": "Hourly snapshot 2026-11-01 12:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/ba92b67f44e1371e2ea2bb7480a03f4a1c29fbb2"
+        },
         {
           "state": "READY",
           "production": true,
@@ -253,16 +263,6 @@
           "sha": "a3afa35",
           "message": "Hourly snapshot 2026-10-26 12:00 UTC",
           "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/a3afa353d1afcf829b7ecf0b1c314756bcd1479b"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1792994521395,
-          "durationMs": 12764,
-          "branch": "main",
-          "sha": "faada8f",
-          "message": "Hourly snapshot 2026-10-26 06:00 UTC",
-          "commitUrl": "https://github.com/quirq-gates/vercel-activity/commit/faada8fcdd56842be1e030220822338502ce5c11"
         }
       ]
     },
@@ -275,6 +275,16 @@
       "createdAt": 1792789042438,
       "shot": "/shots/github-activity.jpg",
       "deployments": [
+        {
+          "state": "READY",
+          "production": true,
+          "createdAt": 1793556045284,
+          "durationMs": 11373,
+          "branch": "main",
+          "sha": "09f7013",
+          "message": "Hourly snapshot 2026-11-01 18:00 UTC",
+          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/09f70135f11742360c388772811e0b54593005d0"
+        },
         {
           "state": "READY",
           "production": true,
@@ -514,16 +524,6 @@
           "sha": "d0d5d4c",
           "message": "Hourly snapshot 2026-10-27 18:00 UTC",
           "commitUrl": "https://github.com/quirq-gates/github-activity/commit/d0d5d4c6db051112a3bbb6a00514b528974439f6"
-        },
-        {
-          "state": "READY",
-          "production": true,
-          "createdAt": 1793102437499,
-          "durationMs": 8687,
-          "branch": "main",
-          "sha": "030395f",
-          "message": "Hourly snapshot 2026-10-27 12:00 UTC",
-          "commitUrl": "https://github.com/quirq-gates/github-activity/commit/030395f2b82d5144cb88b41af1173af76553f58b"
         }
       ]
     },
